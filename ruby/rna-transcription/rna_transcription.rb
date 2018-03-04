@@ -1,15 +1,15 @@
 class Complement
+  PAIRS = {
+    "A" => "U",
+    "T" => "A",
+    "C" => "G",
+    "G" => "C"
+  }
 
   def self.of_dna(dna)
-    pairs = {
-      "A" => "U",
-      "T" => "A",
-      "C" => "G",
-      "G" => "C"
-    }
     dna.each_char.reduce("") do |memo, char|
-      return "" unless pairs.member?(char)
-      memo + pairs[char]
+      break "" unless PAIRS.key?(char)
+      memo + PAIRS[char]
     end
   end
 end
