@@ -4,6 +4,18 @@ defmodule ProteinTranslation do
   """
   @spec of_rna(String.t()) :: {atom, list(String.t())}
   def of_rna(rna) do
+    for <<x::binary-3 <- rna>> do
+      of_codon(x)
+    end
+    |> Enum.reduce([], fn c, acc ->
+      case c do
+        {:ok, codon} ->
+          acc ++ codon
+
+        {:error, _msg} ->
+          {:error, "invalid RNA"}
+      end
+    end)
   end
 
   @doc """
@@ -29,5 +41,33 @@ defmodule ProteinTranslation do
   """
   @spec of_codon(String.t()) :: {atom, String.t()}
   def of_codon(codon) do
+    case codon do
+      n when n in ["UGU", "UGC"] ->
+        {:ok, "Cysteine"}
+
+      n when n in ["UUA", "UUG"] ->
+        {:ok, "Leucine"}
+
+      "AUG" ->
+        {:ok, "Methionine"}
+
+      n when n in ["UUU", "UUC"] ->
+        {:ok, "Phenylalanine"}
+
+      n when n in ["UCU", "UCC", "UCA", "UCG"] ->
+        {:ok, "Serine"}
+
+      "UGG" ->
+        {:ok, "Tryptophan"}
+
+      n when n in ["UAU", "UAC"] ->
+        {:ok, "Tyrosine"}
+
+      n when n in ["UAA", "UAG", "UGA"] ->
+        {:ok, "STOP"}
+
+      _ ->
+        {:error, "invalid codon"}
+    end
   end
 end
