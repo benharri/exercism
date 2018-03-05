@@ -8,8 +8,7 @@ class Complement
 
   def self.of_dna(dna)
     dna.each_char.reduce("") do |memo, char|
-      break "" unless PAIRS.key?(char)
-      memo + PAIRS[char]
+      memo << (PAIRS[char] or break "")
     end
   end
 end
