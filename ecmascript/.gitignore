@@ -1,0 +1,9 @@
+*.swp
+.DS_Store
+npm-debug.log
+tmp
+bin/configlet
+bin/configlet.exe
+node_modules
+.idea
+babel-output
