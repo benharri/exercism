@@ -24,6 +24,17 @@ defmodule Phone do
   """
   @spec number(String.t()) :: String.t()
   def number(raw) do
+    n =
+      Regex.scan(~r/\d/, raw)
+      |> Enum.join()
+      |> String.replace_prefix("1", "")
+
+    if String.length(n) == 10 && not Regex.match?(~r/[01]/, String.at(n, 3)) &&
+         not Regex.match?(~r/[01]/, String.at(n, 0)) && not Regex.match?(~r/[a-z]/i, raw) do
+      n
+    else
+      "0000000000"
+    end
   end
 
   @doc """
@@ -48,6 +59,7 @@ defmodule Phone do
   """
   @spec area_code(String.t()) :: String.t()
   def area_code(raw) do
+    String.slice(number(raw), 0..2)
   end
 
   @doc """
@@ -72,5 +84,7 @@ defmodule Phone do
   """
   @spec pretty(String.t()) :: String.t()
   def pretty(raw) do
+    n = number(raw)
+    "(#{String.slice(n, 0..2)}) #{String.slice(n, 3..5)}-#{String.slice(n, 6..9)}"
   end
 end
