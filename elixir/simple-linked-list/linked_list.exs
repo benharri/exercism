@@ -6,7 +6,7 @@ defmodule LinkedList do
   """
   @spec new() :: t
   def new() do
-    # Your implementation here...
+    []
   end
 
   @doc """
@@ -14,7 +14,7 @@ defmodule LinkedList do
   """
   @spec push(t, any()) :: t
   def push(list, elem) do
-    # Your implementation here...
+    [elem | list]
   end
 
   @doc """
@@ -22,7 +22,7 @@ defmodule LinkedList do
   """
   @spec length(t) :: non_neg_integer()
   def length(list) do
-    # Your implementation here...
+    Enum.count(list)
   end
 
   @doc """
@@ -30,7 +30,7 @@ defmodule LinkedList do
   """
   @spec empty?(t) :: boolean()
   def empty?(list) do
-    # Your implementation here...
+    Enum.empty?(list)
   end
 
   @doc """
@@ -38,7 +38,13 @@ defmodule LinkedList do
   """
   @spec peek(t) :: {:ok, any()} | {:error, :empty_list}
   def peek(list) do
-    # Your implementation here...
+    cond do
+      empty?(list) ->
+        {:error, :empty_list}
+
+      true ->
+        {:ok, hd(list)}
+    end
   end
 
   @doc """
@@ -46,7 +52,13 @@ defmodule LinkedList do
   """
   @spec tail(t) :: {:ok, t} | {:error, :empty_list}
   def tail(list) do
-    # Your implementation here...
+    cond do
+      empty?(list) ->
+        {:error, :empty_list}
+
+      true ->
+        {:ok, tl(list)}
+    end
   end
 
   @doc """
@@ -54,7 +66,14 @@ defmodule LinkedList do
   """
   @spec pop(t) :: {:ok, any(), t} | {:error, :empty_list}
   def pop(list) do
-    # Your implementation here...
+    cond do
+      empty?(list) ->
+        {:error, :empty_list}
+
+      true ->
+        [hd | tail] = list
+        {:ok, hd, tail}
+    end
   end
 
   @doc """
@@ -62,7 +81,7 @@ defmodule LinkedList do
   """
   @spec from_list(list()) :: t
   def from_list(list) do
-    # Your implementation here...
+    list
   end
 
   @doc """
@@ -70,7 +89,7 @@ defmodule LinkedList do
   """
   @spec to_list(t) :: list()
   def to_list(list) do
-    # Your implementation here...
+    Enum.to_list(list)
   end
 
   @doc """
@@ -79,5 +98,6 @@ defmodule LinkedList do
   @spec reverse(t) :: t
   def reverse(list) do
     # Your implementation here...
+    Enum.reverse(list)
   end
 end
