@@ -1,1 +1,5 @@
-# Please implement your solution to rna-transcription in this file
+class RnaComplement
+  def self.of(dna)
+  end
+end
+
