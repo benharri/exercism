@@ -1,2 +1,7 @@
 # Please implement your solution to hello-world in this file
-puts "Hello, World!"
+class HelloWorld
+  def self.hello
+    "Hello, World!"
+  end
+end
+
