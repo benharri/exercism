@@ -4,7 +4,11 @@ public class SecurityPassMaker
 {
     public string GetDisplayName(TeamSupport support)
     {
-        throw new NotImplementedException($"Please implement the SecurityPassMaker.GetDisplayName() method");
+        if (support is Security && !(support is SecurityJunior || support is SecurityIntern || support is PoliceLiaison))
+            return "Security Team Member Priority Personnel";
+        if (support is Staff)
+            return support.Title;
+        return "Too Important for a Security Pass";
     }
 }
 
