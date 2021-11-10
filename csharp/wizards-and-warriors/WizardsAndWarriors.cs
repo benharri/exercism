@@ -35,7 +35,7 @@ class Wizard : Character
 
     public override bool Vulnerable() => vulnerable;
 
-    public override int DamagePoints(Character target) => vulnerable ? 12 : 3;
+    public override int DamagePoints(Character target) => vulnerable ? 3 : 12;
 
     public void PrepareSpell() => vulnerable = false;
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 public enum Plant
@@ -12,8 +11,9 @@ public enum Plant
 
 public class KindergartenGarden
 {
-    private List<string> roster;
-    private Dictionary<string, List<Plant>> plants;
+    private readonly List<string> roster;
+    private readonly string row1;
+    private readonly string row2;
 
     private static readonly IDictionary<char, Plant> PlantCodesToPlants = new Dictionary<char, Plant>
     {
@@ -25,32 +25,23 @@ public class KindergartenGarden
 
     public KindergartenGarden(string diagram)
     {
+        var plants = diagram.Split('\n');
+        row1 = plants[0]; row2 = plants[1];
+
         roster = new List<string>
         {
             "Alice", "Bob", "Charlie", "David",
             "Eve", "Fred", "Ginny", "Harriet",
             "Ileana", "Joseph", "Kincaid", "Larry"
         };
-        BuildFromDiagram(diagram);
-    }
-
-    public KindergartenGarden(string diagram, IEnumerable<string> students)
-    {
-        roster = students.ToList();
-        BuildFromDiagram(diagram);
-    }
-
-    private void BuildFromDiagram(string diagram)
-    {
-        var rows = diagram.Split("\n");
-        foreach (var student in roster)
-        {
-
-        }
     }
 
     public IEnumerable<Plant> Plants(string student)
     {
-        throw new NotImplementedException("You need to implement this function.");
+        var i = 2 * roster.IndexOf(student);
+        var plants = new List<Plant>();
+        plants.AddRange(row1[i..(i + 2)].Select(p => PlantCodesToPlants[p]));
+        plants.AddRange(row2[i..(i + 2)].Select(p => PlantCodesToPlants[p]));
+        return plants;
     }
 }
