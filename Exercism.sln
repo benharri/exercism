@@ -89,6 +89,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TwoFer", "csharp\two-fer\Tw
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WizardsAndWarriors", "csharp\wizards-and-warriors\WizardsAndWarriors.csproj", "{240CFD47-2AEC-49F2-B0B2-884B45E9A27A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HyperOptimizedTelemetry", "csharp\hyper-optimized-telemetry\HyperOptimizedTelemetry.csproj", "{2AF7AFB0-D34C-4B5E-B1F2-A07475BE5B52}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -267,6 +269,10 @@ Global
 		{240CFD47-2AEC-49F2-B0B2-884B45E9A27A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{240CFD47-2AEC-49F2-B0B2-884B45E9A27A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{240CFD47-2AEC-49F2-B0B2-884B45E9A27A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AF7AFB0-D34C-4B5E-B1F2-A07475BE5B52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AF7AFB0-D34C-4B5E-B1F2-A07475BE5B52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AF7AFB0-D34C-4B5E-B1F2-A07475BE5B52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AF7AFB0-D34C-4B5E-B1F2-A07475BE5B52}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
