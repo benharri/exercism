@@ -2,59 +2,44 @@
 
 public static class RealNumberExtension
 {
-    public static double Expreal(this int realNumber, RationalNumber r) =>
-        Math.Pow(realNumber, r.AsDouble());
+    public static double Expreal(this int n, RationalNumber r) => Math.Pow(n, r);
 }
 
 public struct RationalNumber
 {
-    private int _numerator;
-    private int _denominator;
+    private readonly int num;
+    private readonly int den;
 
     public RationalNumber(int numerator, int denominator)
     {
-        _numerator = numerator;
-        _denominator = denominator;
-
-        if (_denominator < 0)
-        {
-            _numerator = -_numerator;
-            _denominator = -_denominator;
-        }
+        var gcd = GreatestCommonDivisor(numerator, denominator);
+        num = numerator / gcd;
+        den = denominator / gcd;
     }
-
-    public override string ToString() => $"{_numerator} / {_denominator}";
 
     public static RationalNumber operator +(RationalNumber r1, RationalNumber r2) =>
-        new(r1._numerator * r2._denominator + r2._numerator * r1._denominator, r1._denominator * r2._denominator);
+        new((r1.num * r2.den) + (r2.num * r1.den), r1.den * r2.den);
 
     public static RationalNumber operator -(RationalNumber r1, RationalNumber r2) =>
-        r1 with { _numerator = -r1._numerator } + r2;
+        new((r1.num * r2.den) - (r2.num * r1.den), r1.den * r2.den);
 
     public static RationalNumber operator *(RationalNumber r1, RationalNumber r2) =>
-        new(r1._numerator * r2._numerator, r1._denominator * r2._denominator);
+        new(r1.num * r2.num, r1.den * r2.den);
 
     public static RationalNumber operator /(RationalNumber r1, RationalNumber r2) =>
-        new(r1._numerator * r2._denominator, r1._denominator * r2._numerator);
+        new(r1.num * r2.den, r1.den * r2.num);
 
     public RationalNumber Abs() =>
-        new(Math.Abs(_numerator), Math.Abs(_denominator));
+        new(Math.Abs(num), Math.Abs(den));
 
-    public RationalNumber Reduce()
-    {
-        var gcd = GreatestCommonDivisor(_numerator, _denominator);
-        return new(_numerator / gcd, _denominator / gcd);
-    }
+    public RationalNumber Reduce() => this;
 
     public RationalNumber Exprational(int power) =>
-        new((int)Math.Pow(_numerator, power), (int)Math.Pow(_denominator, power));
+        new((int)Math.Pow(num, power), (int)Math.Pow(den, power));
 
-    public double Expreal(int baseNumber) =>
-        Math.Pow(Math.Pow(baseNumber, _numerator), 1d / _denominator);
-    
     public static int GreatestCommonDivisor(int a, int b) =>
         b == 0 ? a : GreatestCommonDivisor(b, a % b);
 
-    public double AsDouble() =>
-        _numerator / (double)_denominator;
+    public static implicit operator double(RationalNumber r) =>
+        (double) r.num / r.den;
 }
